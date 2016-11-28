@@ -1,0 +1,182 @@
+% Copyright (c) 2016 William Wennerström
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+
+% Using A4 paper as standard and two sided documents.
+\documentclass[a4paper,twoside]{article}
+
+% These are the packages that are usually used, remove unused yourself.
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{dirtree}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{afterpage}
+\usepackage[margin=0.8in]{geometry}
+
+% Standard colors for the code syntax highlighting.
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+% Define author information
+\newcommand{\authors}{Student Studentson, Elev Elevberg}
+\newcommand{\authorsinfo}{
+    Student Studentson$^1$ \thanks{$^1$E-post: \texttt{stustu-#@student.ltu.se}} \\
+    Elev Elevberg$^2$ \thanks{$^2$E-post: \texttt{eleele-#@student.ltu.se}} \\
+}
+
+% Define group name
+\newcommand{\groupname}{Group name here}
+
+% Define course information
+\newcommand{\coursename}{Course name here}
+\newcommand{\coursecode}{\#\#\#\#\#\#}
+
+% Define project name
+\newcommand{\projectname}{Project name here}
+
+% Define information about the school/university
+\newcommand{\schoolinfo}{Institutionen för system- och rymdteknik \\
+                         Luleå tekniska universitet \\
+                         971 87 Luleå, Sverige
+}
+
+% Define hhrule
+\newcommand{\hhrule}{\midrule\midrule}
+
+% Define Y colymntype
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% Define blankpage macro
+\newcommand\blankpage{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage}
+
+% Header for each page (except first)
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authors} % Authors on left side
+\fancyhead[R]{\coursecode} % Course code on right side
+\fancyfoot[R]{\thepage} % Page numbering on right side
+
+% Code style formatting
+\lstset{showspaces=false,
+        showtabs=false,
+        breaklines=true,
+        showstringspaces=false,
+        breakatwhitespace=false,
+        commentstyle=\color{pgreen},
+        keywordstyle=\color{pblue},
+        stringstyle=\color{pred},
+        basicstyle=\ttfamily,
+        captionpos=t,
+        basicstyle=\scriptsize,
+        numbers=left,
+        numbersep=9pt,
+        numberstyle=\scriptsize\color{pggray}, 
+        frame=L,
+        rulecolor=\color{black},
+        tabsize=2,
+        moredelim=[il][\textcolor{pgrey}]{\$\$},
+        moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\title{\coursename{} --- \coursecode{} \break{}
+  \projectname{}
+  \author{\Large{\groupname{}} \\
+  	\authorsinfo{}}
+  \break{}
+  \bigskip{} \break{}
+  \schoolinfo{}}
+\renewcommand\footnotemark{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\afterpage{\blankpage} % Create blank page
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+\lorem
+
+\newpage
+\section{Result}
+\lorem
+\subsection{A subheading}
+\lorem
+
+\newpage
+\section{Discussion}
+\lorem
+
+\clearpage
+
+\begin{appendices}
+\newpage
+\section{Some very advanced code}
+\label{app:Code}
+\lstinputlisting[language=Python]{a_very_advanced_script.py}
+\end{appendices}
+
+% What follows is some example code, don't forget to remove \iffalse & \fi
+\iffalse% Remove this.
+\section{First section}
+\subsection{First subsection}
+\lstinputlisting[language=python]{code1.py}
+\large Large text
+\lstinputlisting[language=VHDL]{code2.vhd}
+\subsection{Sub section with table}
+\csvautotabular[separator=semicolon]{table.csv}
+\subsection{Sub section with image}
+\includegraphics[width=\textwidth]{animage.png}
+\newpage
+\subsection{Sub section with maths for $f$}
+\large{\bf{Some maths}} \\
+    $f = a+b$ \\
+\newpage
+\begin{tabularx}{\linewidth}{Y Y}
+  \toprule
+
+  Header 1 & Header 2 \\
+
+  \hhrule{}
+
+  Data 1 & Data 2 \\
+
+  \bottomrule
+\end{tabularx}
+\fi% And remove this.
+
+\end{document}
